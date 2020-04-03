@@ -6,6 +6,7 @@ public class Task2_1 {
         int j = 5;
         i = ++j;
         System.out.println("i = " + i + " " +  "j =  " + j);
+        System.out.println();
 
         int x;
         int y = 5;
