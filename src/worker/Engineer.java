@@ -1,7 +1,7 @@
 package worker;
 
+import entity.*;
 import people.Person;
-import test.*;
 
 import java.util.Random;
 
@@ -34,8 +34,6 @@ public abstract class Engineer extends Person implements InventableCode, Testabl
 
     @Override
     public Result executeTest(Test test) {
-        return test.apply(8);
+        return test.apply(2);
     }
-
-
 }

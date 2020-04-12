@@ -1,4 +1,4 @@
-package test;
+package entity;
 
 import worker.AutomationEngineer;
 import worker.Engineer;
@@ -58,9 +58,11 @@ public abstract class Test implements Function<Engineer, Result> {
 
     @Override
     public Result apply(int anxiety) {
-        if ((this.getClass().getCanonicalName() == ManualTest.class.getCanonicalName()) && (engineer.getClass().getCanonicalName() == AutomationEngineer.class.getCanonicalName())) {
+        if ((this.getClass().getCanonicalName() == ManualTest.class.getCanonicalName()) &&
+                (engineer.getClass().getCanonicalName() == AutomationEngineer.class.getCanonicalName())) {
             engineer.setAnxiety(anxiety);
-        } else if ((this.getClass().getCanonicalName() == AutomatedTest.class.getCanonicalName()) && (engineer.getClass().getCanonicalName() == TestEngineer.class.getCanonicalName())) {
+        } else if ((this.getClass().getCanonicalName() == AutomatedTest.class.getCanonicalName()) &&
+                (engineer.getClass().getCanonicalName() == TestEngineer.class.getCanonicalName())) {
             engineer.setAnxiety(anxiety);
         } else {
             engineer.setAnxiety(1);

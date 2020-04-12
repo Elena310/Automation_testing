@@ -8,7 +8,6 @@ public abstract class Human implements Speakable {
     }
 
     public Human() {
-
     }
 
     public int getAge() {
@@ -18,6 +17,4 @@ public abstract class Human implements Speakable {
     public void setAge(int age) {
         this.age = age;
     }
-
-
 }
