@@ -10,6 +10,4 @@ public class TestEngineer extends Engineer {
         super.skill = skill;
         super.anxiety = anxiety;
     }
-
-
 }

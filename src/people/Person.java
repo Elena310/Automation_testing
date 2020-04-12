@@ -25,11 +25,21 @@ public class Person extends Human {
 
     }
 
+    public Person(int age) {
+        this.age = age;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
     public Person(int age, String name, String surname) {
         super.age = age;
         this.name = name;
         this.surname = surname;
     }
 
-
+    public String toString() {
+        return getClass().getName() + "age: " + age + "name: " + name + "surname: " + surname;
+    }
 }

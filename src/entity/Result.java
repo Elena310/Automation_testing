@@ -1,4 +1,4 @@
-package test;
+package entity;
 
 public enum Result {
     PASSED("Good!"),

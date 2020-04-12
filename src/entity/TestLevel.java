@@ -1,4 +1,4 @@
-package test;
+package entity;
 
 public enum TestLevel {
     UNIT(1), API(3), GUI(9);
