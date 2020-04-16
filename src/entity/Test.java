@@ -28,6 +28,17 @@ public abstract class Test implements Function<Engineer, Result> {
 
     }
 
+    public Test(TestLevel testLevel, int instability) {
+        this.complexity = testLevel.getCOMPLEXITY();
+        if (instability == 0) {
+            this.instability = 1;
+        } else if (instability > 10) {
+            this.instability = 10;
+        } else {
+            this.instability = instability;
+        }
+    }
+
     public int getInstability() {
         return instability;
     }
@@ -67,7 +78,7 @@ public abstract class Test implements Function<Engineer, Result> {
         } else {
             engineer.setAnxiety(1);
         }
-        if (anxiety * complexity * instability > 30) {
+        if ((anxiety * complexity * instability) / engineer.getSkill() > 30) {
             result = Result.FAILED;
             return Result.FAILED;
         } else {

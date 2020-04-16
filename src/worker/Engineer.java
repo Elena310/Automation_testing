@@ -6,7 +6,7 @@ import people.Person;
 import java.util.Random;
 
 public abstract class Engineer extends Person implements InventableCode, Testable {
-    protected int skill = new Random().nextInt(11);
+    protected int skill = new Random().nextInt(10) + 1;
     protected int anxiety = 3;
 
     public int getSkill() {
@@ -24,7 +24,6 @@ public abstract class Engineer extends Person implements InventableCode, Testabl
     public void setAnxiety(int anxiety) {
         this.anxiety = anxiety;
     }
-
 
     public int invent() {
         Code code = new Code(6);
