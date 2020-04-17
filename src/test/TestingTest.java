@@ -83,4 +83,23 @@ public class TestingTest {
     public void verifyExecuteAutomatedTest2ByAutomationEngineer() {
         Assert.assertEquals(Result.FAILED, this.apply3(TestLevel.GUI, 20, 40, 1));
     }
+
+    @Test
+    public void verifySetInstabilityZero() {
+        entity.Test test = new ManualTest(TestLevel.API, 0);
+        Assert.assertEquals(1, test.getInstability());
+    }
+
+    @Test
+    public void verifySetInstabilityMoreThanTen() {
+        entity.Test test = new AutomatedTest(TestLevel.GUI, 18);
+        Assert.assertEquals(10, test.getInstability());
+    }
+
+    @Test
+    public void verifySetInstabilityFromOneToTen() {
+        entity.Test test = new AutomatedTest(TestLevel.UNIT, 9);
+        Assert.assertEquals(9, test.getInstability());
+    }
+
 }
