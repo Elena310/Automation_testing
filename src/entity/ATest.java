@@ -5,30 +5,19 @@ import worker.Engineer;
 import worker.TestEngineer;
 
 interface Function<Engineer, Result> {
-    Result apply(int anxiety);
+    Result apply(Engineer engineer);
 }
 
-public abstract class Test implements Function<Engineer, Result> {
+public abstract class ATest implements Function<Engineer, Result> {
     int complexity;
     int instability;
     Result result;
-    Engineer engineer;
 
-    public Test() {
-
-    }
-
-    public Test(int complexity) {
-        this.complexity = complexity;
+    public ATest() {
 
     }
 
-    public Test(TestLevel testLevel) {
-        this.complexity = testLevel.getCOMPLEXITY();
-
-    }
-
-    public Test(TestLevel testLevel, int instability) {
+    public ATest(TestLevel testLevel, int instability) {
         this.complexity = testLevel.getCOMPLEXITY();
         if (instability == 0) {
             this.instability = 1;
@@ -47,14 +36,6 @@ public abstract class Test implements Function<Engineer, Result> {
         this.instability = instability;
     }
 
-    public Engineer getEngineer() {
-        return engineer;
-    }
-
-    public void setEngineer(Engineer engineer) {
-        this.engineer = engineer;
-    }
-
     public int getComplexity() {
         return complexity;
     }
@@ -68,9 +49,10 @@ public abstract class Test implements Function<Engineer, Result> {
     }
 
     @Override
-    public Result apply(int anxiety) {
+    public Result apply(Engineer engineer) {
+        int anxiety = 3;
         if ((this.getClass().getCanonicalName() == ManualTest.class.getCanonicalName()) &&
-                (engineer.getClass().getCanonicalName() == AutomationEngineer.class.getCanonicalName())) {
+                engineer.getClass().getCanonicalName() == AutomationEngineer.class.getCanonicalName()) {
             engineer.setAnxiety(anxiety);
         } else if ((this.getClass().getCanonicalName() == AutomatedTest.class.getCanonicalName()) &&
                 (engineer.getClass().getCanonicalName() == TestEngineer.class.getCanonicalName())) {
@@ -85,6 +67,8 @@ public abstract class Test implements Function<Engineer, Result> {
             result = Result.PASSED;
             return Result.PASSED;
         }
+
+
     }
 }
 

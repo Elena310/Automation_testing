@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import people.Person;
+import worker.Engineer;
+import worker.TestEngineer;
 
 public class PersonTest {
     @Before
@@ -40,4 +42,12 @@ public class PersonTest {
         Person person = new Person("Elena");
         Assert.assertEquals("Person name is not as expected", person.getName(), "Marina");
     }
+
+    @Test
+    public void speakTest() {
+        Engineer engineer = new TestEngineer();
+        Assert.assertEquals("Hi, it is TestEngineer speaking!", engineer.speak());
+    }
+
+
 }
