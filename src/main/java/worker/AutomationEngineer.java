@@ -8,4 +8,6 @@ public class AutomationEngineer extends Engineer {
         super.skill = skill;
         super.anxiety = anxiety;
     }
+
+
 }

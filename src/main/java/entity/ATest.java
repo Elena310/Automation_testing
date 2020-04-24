@@ -48,7 +48,7 @@ public abstract class ATest implements Function<Engineer, Result> {
         return result;
     }
 
-    @Override
+
     public Result apply(Engineer engineer) {
         int anxiety = 3;
         if ((this.getClass().getCanonicalName() == ManualTest.class.getCanonicalName()) &&
