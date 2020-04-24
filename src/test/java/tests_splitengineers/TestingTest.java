@@ -1,4 +1,4 @@
-package test;
+package tests_splitengineers;
 
 import entity.*;
 import org.junit.Assert;
