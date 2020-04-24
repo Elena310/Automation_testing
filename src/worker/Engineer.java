@@ -9,20 +9,20 @@ public abstract class Engineer extends Person implements InventableCode, Testabl
     protected int skill = new Random().nextInt(10) + 1;
     protected int anxiety = 3;
 
-    public int getSkill() {
-        return skill;
-    }
-
-    public void setSkill(int skill) {
-        this.skill = skill;
-    }
-
     public int getAnxiety() {
         return anxiety;
     }
 
     public void setAnxiety(int anxiety) {
         this.anxiety = anxiety;
+    }
+
+    public int getSkill() {
+        return skill;
+    }
+
+    public void setSkill(int skill) {
+        this.skill = skill;
     }
 
     public int invent() {
@@ -32,7 +32,7 @@ public abstract class Engineer extends Person implements InventableCode, Testabl
     }
 
     @Override
-    public Result executeTest(Test test) {
-        return test.apply(2);
+    public Result executeTest(ATest test) {
+        return test.apply(this);
     }
 }

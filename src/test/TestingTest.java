@@ -1,105 +1,57 @@
 package test;
 
-import entity.AutomatedTest;
-import entity.ManualTest;
-import entity.Result;
-import entity.TestLevel;
+import entity.*;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import worker.AutomationEngineer;
 import worker.Engineer;
 import worker.TestEngineer;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
 public class TestingTest {
 
-    public Result apply(TestLevel testLevel, int instability, int complexity, int anxiety) {
-        Engineer engineer = new AutomationEngineer();
-        entity.Test test = new ManualTest(testLevel, instability);
-        test.setComplexity(complexity);
-        test.setEngineer(engineer);
-        return test.apply(anxiety);
+    private Engineer en;
+    private ATest test;
+    private int skill;
+    private Result expected;
+
+    public TestingTest(Engineer en, int skill, ATest test, Result expected) {
+        this.en = en;
+        this.test = test;
+        this.skill = skill;
+        this.expected = expected;
     }
 
-    public Result apply1(TestLevel testLevel, int instability, int complexity, int anxiety) {
-        Engineer engineer = new TestEngineer();
-        entity.Test test = new ManualTest(testLevel, instability);
-        test.setComplexity(complexity);
-        test.setEngineer(engineer);
-        return test.apply(anxiety);
-    }
-
-    public Result apply2(TestLevel testLevel, int instability, int complexity, int anxiety) {
-        Engineer engineer = new TestEngineer();
-        entity.Test test = new AutomatedTest(testLevel, instability);
-        test.setComplexity(complexity);
-        test.setEngineer(engineer);
-        return test.apply(anxiety);
-    }
-
-    public Result apply3(TestLevel testLevel, int instability, int complexity, int anxiety) {
-        Engineer engineer = new AutomationEngineer();
-        entity.Test test = new AutomatedTest(testLevel, instability);
-        test.setComplexity(complexity);
-        test.setEngineer(engineer);
-        return test.apply(anxiety);
-    }
-
-    @Test
-    public void verifyExecuteManualTest1ByAutomationEngineer() {
-        Assert.assertEquals(Result.PASSED, this.apply(TestLevel.UNIT, 1, 2, 3));
+    @Parameterized.Parameters
+    public static Collection<Object[]> primeNumbers() {
+        return Arrays.asList(new Object[][]{
+                {new TestEngineer(), 1, new ManualTest(TestLevel.UNIT, 10), Result.PASSED},
+                {new TestEngineer(), 10, new ManualTest(TestLevel.API, 0), Result.PASSED},
+                {new TestEngineer(), 1, new ManualTest(TestLevel.UNIT, 11), Result.PASSED},
+                {new TestEngineer(), 10, new ManualTest(TestLevel.GUI, 1), Result.PASSED},
+                {new TestEngineer(), 1, new AutomatedTest(TestLevel.GUI, 0), Result.PASSED},
+                {new TestEngineer(), 10, new AutomatedTest(TestLevel.API, 11), Result.PASSED},
+                {new TestEngineer(), 1, new AutomatedTest(TestLevel.UNIT, 1), Result.PASSED},
+                {new TestEngineer(), 10, new AutomatedTest(TestLevel.UNIT, 1), Result.PASSED},
+                {new AutomationEngineer(), 10, new AutomatedTest(TestLevel.API, 0), Result.PASSED},
+                {new AutomationEngineer(), 1, new AutomatedTest(TestLevel.GUI, 10), Result.FAILED},
+                {new AutomationEngineer(), 10, new AutomatedTest(TestLevel.UNIT, 1), Result.PASSED},
+                {new AutomationEngineer(), 10, new AutomatedTest(TestLevel.UNIT, 11), Result.PASSED},
+                {new AutomationEngineer(), 10, new ManualTest(TestLevel.GUI, 11), Result.PASSED},
+                {new AutomationEngineer(), 1, new ManualTest(TestLevel.API, 1), Result.PASSED},
+                {new AutomationEngineer(), 10, new ManualTest(TestLevel.UNIT, 0), Result.PASSED},
+                {new AutomationEngineer(), 10, new ManualTest(TestLevel.API, 10), Result.PASSED}
+        });
     }
 
     @Test
-    public void verifyExecuteManualTest2ByAutomationEngineer() {
-        Assert.assertEquals(Result.FAILED, this.apply(TestLevel.GUI, 10, 10, 3));
+    public void verifyExecuteTest() {
+        en.setSkill(skill);
+        Assert.assertEquals("Engineer is not correct!", expected, en.executeTest(test));
     }
-
-    @Test
-    public void verifyExecuteManualTest1ByTestEngineer() {
-        Assert.assertEquals(Result.PASSED, this.apply1(TestLevel.API, 2, 1, 1));
-    }
-
-    @Test
-    public void verifyExecuteManualTest2ByTestEngineer() {
-        Assert.assertEquals(Result.FAILED, this.apply1(TestLevel.GUI, 10, 20, 1));
-    }
-
-    @Test
-    public void verifyExecuteAutomatedTest1ByTestEngineer() {
-        Assert.assertEquals(Result.PASSED, this.apply2(TestLevel.API, 2, 2, 3));
-    }
-
-    @Test
-    public void verifyExecuteAutomatedTest2ByTestEngineer() {
-        Assert.assertEquals(Result.FAILED, this.apply2(TestLevel.GUI, 20, 40, 3));
-    }
-
-    @Test
-    public void verifyExecuteAutomatedTest1ByAutomationEngineer() {
-        Assert.assertEquals(Result.PASSED, this.apply3(TestLevel.UNIT, 3, 2, 1));
-    }
-
-    @Test
-    public void verifyExecuteAutomatedTest2ByAutomationEngineer() {
-        Assert.assertEquals(Result.FAILED, this.apply3(TestLevel.GUI, 20, 40, 1));
-    }
-
-    @Test
-    public void verifySetInstabilityZero() {
-        entity.Test test = new ManualTest(TestLevel.API, 0);
-        Assert.assertEquals(1, test.getInstability());
-    }
-
-    @Test
-    public void verifySetInstabilityMoreThanTen() {
-        entity.Test test = new AutomatedTest(TestLevel.GUI, 18);
-        Assert.assertEquals(10, test.getInstability());
-    }
-
-    @Test
-    public void verifySetInstabilityFromOneToTen() {
-        entity.Test test = new AutomatedTest(TestLevel.UNIT, 9);
-        Assert.assertEquals(9, test.getInstability());
-    }
-
 }

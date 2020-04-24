@@ -1,64 +1,53 @@
 package test;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import worker.AutomationEngineer;
 import worker.Engineer;
 import worker.TestEngineer;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
 public class EngineerTest {
 
-    private Engineer testEngineer = new TestEngineer();
-    private Engineer automationEngineer = new AutomationEngineer();
+    private Engineer en;
 
-    @Before
-    public void beforeClass() {
-        System.out.println("Test is launched");
+    public EngineerTest(Engineer en) {
+        this.en = en;
     }
 
-    @After
-    public void afterClass() {
-        System.out.println("Test is finished");
-    }
-
-    @Test
-    public void getCodeTest() {
-        Assert.assertEquals("Amount of code is not expected", testEngineer.invent(), 600);
-    }
-
-    @Test
-    public void getCodeFailedTest() {
-        Assert.assertEquals("Amount of code is not expected", automationEngineer.invent(), 500);
+    @Parameterized.Parameters
+    public static Collection<Object[]> primeNumbers() {
+        return Arrays.asList(new Object[][]{
+                {new TestEngineer()},
+                {new AutomationEngineer()}
+        });
     }
 
     @Test
     public void getRandomSkillTest() {
-        Assert.assertTrue("Value of skill reached beyond", automationEngineer.getSkill() >= 1 &&
-                automationEngineer.getSkill() < 11);
+        Assert.assertTrue("Value of skill reached beyond", en.getSkill() >= 1 &&
+                en.getSkill() < 11);
     }
 
     @Test
     public void setSkillByAutomation() {
-        automationEngineer.setSkill(5);
-        Assert.assertEquals("Value of skill is not correct", 5, automationEngineer.getSkill());
+        en.setSkill(5);
+        Assert.assertEquals("Value of skill is not correct", 5, en.getSkill());
     }
 
     @Test
     public void verifyDefaultAnxietyByManual() {
-        Assert.assertEquals("Value of anxiety is not expected", 3, testEngineer.getAnxiety());
+        Assert.assertEquals("Value of anxiety is not expected", 3, en.getAnxiety());
     }
 
     @Test
     public void verifySetAnxietyByManual() {
-        testEngineer.setAnxiety(8);
-        Assert.assertEquals("Value of anxiety is not expected", 8, testEngineer.getAnxiety());
-    }
-
-    @Test
-    public void speakTest() {
-        Engineer engineer = new TestEngineer();
-        Assert.assertEquals("Hi, it is TestEngineer speaking!", engineer.speak());
+        en.setAnxiety(3);
+        Assert.assertEquals("Value of anxiety is not expected", 3, en.getAnxiety());
     }
 }

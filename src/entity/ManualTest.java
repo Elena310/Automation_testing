@@ -1,6 +1,6 @@
 package entity;
 
-public class ManualTest extends Test {
+public class ManualTest extends ATest {
     public ManualTest() {
     }
 
