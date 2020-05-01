@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <title>Main Page</title>
+    <link href="favicon.png" rel="icon">
+    <script>
+      var cachedValue = '';
+
+      function hideValue(el) {
+        cachedValue = el.value;
+        el.value = '';
+      }
+
+      function setValue(el) {
+        el.value = cachedValue;
+      }
+
+    </script>
+    <style>
+      body {
+        text-align: center;
+      }
+      h1 {
+        font-family: "Century Gothic", sans-serif;
+        font-size: 500%;
+      }
+      input {
+        background-position: center;
+        width: 400px;
+        height: 110px;
+        font-weight: 700;
+        font-size: 200%;
+        border: none;
+      }
+      input#about {
+        background: url('bcg_1.png');
+      }
+      input#regis {
+        background: url('bcg_2.png');
+      }
+      input#media {
+        background: url('bcg_3.png');
+      }
+      input#about:hover,
+      input#regis:hover,
+      input#media:hover {
+        cursor: pointer;
+        background: url('bcg_hover.png');
+      }
+      p {
+        color: grey;
+        font-family: "Comic Sans MS", sans-serif;
+        font-size: 12pt;
+      }
+
+    </style>
+</head>
+
+<body>
+<h1>Welcome</h1>
+<form action="about.html" method="get">
+    <input id="about" onmouseout="setValue(this)" onmouseover="hideValue(this)" type="submit" value="About Us"/>
+</form>
+<form action="index.php" method="get">
+    <input id="regis" onmouseout="setValue(this)" onmouseover="hideValue(this)" type="submit"
+           value="Check Registration"/>
+</form>
+<form action="media.html" method="get">
+    <input id="media" onmouseout="setValue(this)" onmouseover="hideValue(this)" type="submit" value="Get Media"/>
+</form>
+<br/>
+<br/>
+<p>This is just dummy site (c)</p>
+</body>
+</html>
