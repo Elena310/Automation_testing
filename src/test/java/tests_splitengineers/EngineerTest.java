@@ -1,8 +1,10 @@
 package tests_splitengineers;
 
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
 import worker.AutomationEngineer;
 import worker.Engineer;
@@ -12,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EngineerTest {
 
     private Engineer en;
